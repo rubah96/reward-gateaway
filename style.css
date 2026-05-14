@@ -1,0 +1,34 @@
+﻿body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; margin: 0; color: #1a1a1a; }
+.admin-panel { background: #121212; color: #00ff00; padding: 15px; position: fixed; top: 0; width: 100%; z-index: 999; display: flex; gap: 10px; border-bottom: 2px solid #333; }
+.admin-panel input { background: #222; border: 1px solid #444; color: white; padding: 5px; flex: 1; }
+
+.container { max-width: 450px; margin: 80px auto; padding: 20px; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.brand { font-weight: 800; font-size: 24px; color: #0052ff; }
+.lang-switcher { cursor: pointer; font-weight: bold; color: #666; font-size: 12px; }
+
+.content-box { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center; }
+h1 { font-size: 22px; margin-bottom: 15px; }
+p { font-size: 14px; color: #666; line-height: 1.6; }
+
+.status-card { background: #f0f4ff; padding: 10px; border-radius: 12px; margin: 20px 0; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.dot { height: 8px; width: 8px; background-color: #0052ff; border-radius: 50%; }
+.pulse { animation: pulse-blue 2s infinite; }
+
+.btn-main { background: #0052ff; color: white; border: none; width: 100%; padding: 18px; border-radius: 14px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.btn-main:hover { background: #0041cc; }
+
+@keyframes pulse-blue { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 82, 255, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 82, 255, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 82, 255, 0); } }
+
+.gold-text { color: #b8860b; }
+.reward-theme { border: 2px solid #ffd700; }
+.reward-card { background: #fffdf0 !important; border: 1px solid #ffe44d; }
+.btn-reward { background: linear-gradient(45deg, #ffd700, #b8860b) !important; color: white !important; box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3); }
+
+.pulse-gold { background-color: #ffd700 !important; animation: pulse-gold 2s infinite; }
+
+@keyframes pulse-gold {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
